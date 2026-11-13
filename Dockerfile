@@ -2,8 +2,12 @@
 FROM gradle:8.5-jdk21 AS build
 WORKDIR /app
 
-# Copiamos los archivos de configuración de Gradle y el código fuente
+# Copiamos los archivos de configuración y el gradlew
 COPY build.gradle settings.gradle gradlew ./
+
+# 🔥 AQUÍ AGREGAMOS EL PERMISO DE EJECUCIÓN
+RUN chmod +x gradlew
+
 COPY gradle ./gradle
 COPY src ./src
 
