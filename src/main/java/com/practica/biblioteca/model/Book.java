@@ -1,31 +1,35 @@
-
 package com.practica.biblioteca.model;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "books")
 public class Book {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String title;
-    private String author;
-    private String isbn;
-    private Integer publicationYear;
-    private String category;
-    private boolean available;
 
+    @Column(nullable = false, length = 150)
+    private String title;
+
+    @Column(nullable = false, length = 100)
+    private String author;
+
+    @Column(name = "publication_year")
+    private Integer publicationYear;
+
+    // Constructor vacío requerido por JPA
     public Book() {
     }
 
-    public Book(Long id, String title, String author,
-                String isbn, Integer publicationYear,
-                String category, boolean available) {
-        this.id = id;
+    public Book(String title, String author, Integer publicationYear) {
         this.title = title;
         this.author = author;
-        this.isbn = isbn;
         this.publicationYear = publicationYear;
-        this.category = category;
-        this.available = available;
     }
 
+    // Getters y Setters
     public Long getId() {
         return id;
     }
@@ -50,35 +54,11 @@ public class Book {
         this.author = author;
     }
 
-    public String getIsbn() {
-        return isbn;
-    }
-
-    public void setIsbn(String isbn) {
-        this.isbn = isbn;
-    }
-
     public Integer getPublicationYear() {
         return publicationYear;
     }
 
     public void setPublicationYear(Integer publicationYear) {
         this.publicationYear = publicationYear;
-    }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
-    }
-
-    public boolean isAvailable() {
-        return available;
-    }
-
-    public void setAvailable(boolean available) {
-        this.available = available;
     }
 }
